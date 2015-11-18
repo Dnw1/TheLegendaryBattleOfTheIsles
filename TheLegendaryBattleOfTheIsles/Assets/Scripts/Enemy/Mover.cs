@@ -98,4 +98,10 @@ public class Mover : MonoBehaviour {
 		
 		currentWaypoint = wayPoints[currentIndex];
 	}
+	//PathData waypoints = GameObject.FindGameObjectWithTag("Path").GetComponent<PathData>();
+	//Path = new Path (waypoints.waypoints, waypoints,isLoopable);
+	//if(!path._isPathFinished)
+	//Move toWaypoints();
+	//else destroy this.gameobject
+	//priv MoveToWaypoint(){vctor2 waypoints = path.GetCurrentWaypoint();  vctor2 moveDirection = waypoint - _rb2d.position;  floa angle = Mathf.Atan2 (moveDirection,y, moveDirection.x)* Mathf.Rad2Deg;}
 }
