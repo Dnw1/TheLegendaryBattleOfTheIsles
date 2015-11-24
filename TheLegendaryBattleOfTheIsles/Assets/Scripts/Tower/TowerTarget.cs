@@ -6,6 +6,7 @@ public class TowerTarget : MonoBehaviour {
 	private GameObject target;
 	[SerializeField] private float targettingRadius;
 	private int layerMask;
+	public Transform Target;
 
 	void Start(){
 		layerMask = LayerMask.GetMask ("Enemy");
@@ -15,6 +16,11 @@ public class TowerTarget : MonoBehaviour {
 	void Update () {
 		Collider2D col = Physics2D.OverlapCircle(this.transform.position, targettingRadius, layerMask);
 		Debug.Log (col);
+		if (col) {
+			Target = col.gameObject.transform;
+		} else {
+			Target = null;
+		}
 	}
 
 	void OnDrawGizmos(){
