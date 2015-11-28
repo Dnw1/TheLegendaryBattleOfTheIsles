@@ -1,30 +1,28 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class EnemySpawner : MonoBehaviour {
 
 	[SerializeField] private GameObject objectToSpawn;
 	[SerializeField] private GameObject objectToSpawn2;
-	[SerializeField] private GameObject objectToSpawn3;
-	[SerializeField] private float spawnTimer;
-	private float SpawnCounting;
-	private 
+	[SerializeField]private float SpawnCounting;
 
 	void Start(){
-		InvokeRepeating("SpawnEnemy", 0.5f , spawnTimer);
+		StartCoroutine (SpawnEnemy ());
 	}
 
-	private void SpawnEnemy()
+	IEnumerator SpawnEnemy()
 	{
-		if (SpawnCounting < 6) {
+		while (SpawnCounting < 200) {
 			GameObject obj = Instantiate (objectToSpawn, this.transform.position, Quaternion.identity) as GameObject;
 			obj.transform.SetParent (this.transform);
-			SpawnCounting = SpawnCounting++;
-		}//Needs a click controller via ui.
-		if (SpawnCounting > 4 || SpawnCounting < 11){
-			GameObject obj = Instantiate (objectToSpawn, this.transform.position, Quaternion.identity) as GameObject;
-			obj.transform.SetParent (this.transform);
-			SpawnCounting = SpawnCounting++;
+			SpawnCounting = SpawnCounting + 1;
+			yield return new WaitForSeconds(3);
 		}
 	}
 }
+		/* Code I intended to use for spawning boss but he cannot move
+		if(SpawnCounting == 6 && SpawnCounting < 7) {
+			GameObject obj = Instantiate (objectToSpawn2, this.transform.position, Quaternion.identity) as GameObject;
+			obj.transform.SetParent (this.transform);
+	    } */

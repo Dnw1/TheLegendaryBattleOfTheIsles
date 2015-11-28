@@ -1,30 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bullet : MonoBehaviour {
-
-	/*basicTower = tower.gameObject.GetComponent<> ();
-	target = BT.CurrentTarget.transform;
-
-	if (BT.targetNumber == 0) 
-	{
-		Destroy(gameObject);
+public class Bullet : MonoBehaviour
+{
+	private float TimeAlive;
+	private Vector2 TargetPos;
+	
+	// Use this for initialization
+	void Start () {
+		
 	}
-
-	[SerializeField] private float speed = 0.5f;
-
+	public void SetLocation(Vector2 position)
+	{
+		TargetPos = position;
+	}
+	// Update is called once per frame
 	void Update ()
-	{
-		float step = speed * Time.deltaTime;
-		transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+	{	
+		Move ();
+		TimeAlive += 1f * Time.deltaTime;
 	}
-
-	void OnTriggerEnter(Collider other)
+	private void Move()
 	{
-		if (other.tag == "Enemy")
+		this.transform.position = Vector2.MoveTowards(this.transform.position, TargetPos, 12f * Time.deltaTime);
+
+		if(TimeAlive >= 0.8f)
 		{
-			Destroy(gameObject);
-			
+			Destroy(this.gameObject);
 		}
-     }*/
+	}
+	void OnTriggerEnter2D(Collider2D col)
+	{
+		if (col.gameObject.tag == "Enemy")
+		{
+			col.GetComponent<EnemyHp>().HpManager();
+			Destroy(this.gameObject);
+		}
+	}
+	
 }
